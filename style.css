@@ -1,5 +1,5 @@
 .logo{
-    width: 80px;
+    width: 90px;
 }
 .cart{
     width : 25px;
@@ -17,9 +17,14 @@
 }
 
 .navbar > ul>li {
+    
     cursor: pointer;
     margin: 5px;
     padding: 5px;   
+}
+.navbar > ul>li>a{
+    text-decoration: none;
+    color: black;
 }
 .res-logo{
     width: 150px;
@@ -29,6 +34,7 @@
 }
 .res-card{
     width:160;
+    height: 475;
     background-color: #f0f0f0;
     margin: 5px;
 }
@@ -47,9 +53,103 @@
 }
 .filter-btn{
     cursor: pointer;
-    background-color: orange;
     width: 100;
+    height:25px;
+    margin-top: 5px;
     border-radius: 7px;
     border: 3px solid black;
 }
 
+.shimmer-container{
+    margin-top : 27.67px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.shimmer-card{
+    width:160;
+    height:475;
+    background-color: #f0f0f0;
+    margin: 5px;
+}
+.shimmer-logo{
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    margin: 5px 5px 0px 5px;
+}
+.login{
+    background-color: #f0f0f0;
+    border: none;
+    
+}
+.login:hover{
+    cursor: pointer;
+    border: 1px solid ;
+}
+.buttons{
+    display: flex;
+}
+.search{
+    margin-left:10px;
+}
+.search-btn{
+    cursor: pointer;
+    margin-left: 5px;
+    width: 100;
+    height:25px;
+    border-radius: 7px;
+    border: 3px solid black;
+}
+.res-menu{
+    margin:30px 200px 10px 200px;
+}
+
+.name-info{
+    background-color: #f0f0f0;
+    border-radius: 45px;
+    width: 850px;
+    height: 310px;
+
+}
+.name{
+    padding: 5px;
+    margin-left: 25px;
+}
+
+.menu-info{
+    /* background-color: #fff4c7; */
+    padding-left: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
+    border: 1px rgb(0, 0, 0);
+    border-radius: 25px;
+    width: 800px;
+    height:220px;
+}
+.ratings{
+    margin-left: 2px;
+    display: flex;
+    gap: 60px;
+}
+.cuisines{
+    color:red;
+}
+.locality{
+    font-weight: bold;
+    display: flex;
+    gap: 10px;
+}
+.click-res {
+    display: block;
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Inherits the text color */
+}
+.item-details{
+    display: flex;
+    justify-content: space-between;
+}
+.item-logo{
+    height: 90px;
+    width: 90px;
+}
