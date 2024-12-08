@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
-import { CART_LOGO } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 const Header = ()=>{
     const[btnName , setBtnName] = useState("login");
+    const onlineStatus = useOnlineStatus();
 
     return (
-    <div className="header">
+    <div className="bg-slate-500 flex justify-between items-center shadow-xl">
         <div className="logo-container">
-            <Link to="/"><img className="logo" alt="logo" src={LOGO_URL}></img></Link>
+            <Link to="/"><img className=" m-2 w-24 rounded-lg" alt="logo" src={LOGO_URL}></img></Link>
         </div>
         <div className="navbar">
-            <ul>
-                <li><Link to="/">Home</Link></li> 
-                <li><Link to="/about"> About Us</Link> </li> 
-                <li><Link to="/contact"> Contact</Link></li> 
-                <li><img className="cart" src={CART_LOGO}></img></li> 
-                <button className="login" onClick={()=>{
+            <ul className="flex items-center">
+                <li className=" mx-1 ">Online Status: {onlineStatus ? "✅" : "🔴"}</li>
+                <li className=" mx-1 "><Link to="/">Home</Link></li> 
+                <li className=" mx-1 "><Link to="/about"> About Us</Link> </li> 
+                <li className=" mx-1 "><Link to="/contact"> Contact</Link></li> 
+                <li className=" mx-1 ">Cart</li>
+                <button className="login " onClick={()=>{
                     setBtnName(btnName === "login" ? "logout" : "login");
                 }}>{btnName}</button>
             </ul>

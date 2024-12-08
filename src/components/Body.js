@@ -39,24 +39,24 @@ const Body = ()=>{
     if(filteredList.length === 0){
         return (
             <div>
-                <div className="buttons">
-                    <button className="filter-btn" onClick={filter} >
+                <div className="buttons flex items-center m-2">
+                    <button className="filter-btn mx-2 bg-slate-500 rounded-xl w-20 " onClick={filter} >
                         {!isFiltered ? "filter" : "see all" }
                     </button>
 
                     <div className="search">
-                        <input className="input" type="text" value={searchValue}  onChange={(e)=>{
+                        <input className="input  bg-gray-200 rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
                             setSearchValue(e.target.value);
                         }}></input>
-                        <button className="search-btn"  onClick={()=>{
+                        <button className="search-btn mx-2 bg-slate-500 rounded-xl w-20"  onClick={()=>{
                             const filteredRes = resData.filter((res)=> 
                                 res.info.name.toLowerCase().includes(searchValue.toLowerCase())
                             )
-                            setFilteredList(filteredRes)
+                            setFilteredList(filteredRes);
                         }} >search</button>
                     </div>
                 </div>
-                <div>
+                <div className="flex flex-wrap">
                     <Shimmer/>
                 </div>
             </div>
@@ -67,16 +67,16 @@ const Body = ()=>{
     
     return (
         <div className="Body" >
-            <div className="buttons">
-                <button className="filter-btn" onClick={filter} >
+            <div className="buttons flex items-center m-2 ">
+                <button className="filter-btn mx-2 bg-slate-500 rounded-xl w-20 " onClick={filter} >
                     {!isFiltered ? "filter" : "see all" }
                 </button>
 
-                <div className="search">
-                    <input className="input" type="text" value={searchValue}  onChange={(e)=>{
+                <div className="search mx-2">
+                    <input className="input bg-gray-200 rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
                         setSearchValue(e.target.value);
                     }}></input>
-                    <button className="search-btn"  onClick={()=>{
+                    <button className="search-btn mx-2 bg-slate-500 rounded-xl w-20"  onClick={()=>{
                         const filteredRes = resData.filter((res)=> 
                             res.info.name.toLowerCase().includes(searchValue.toLowerCase())
                         )
@@ -84,9 +84,9 @@ const Body = ()=>{
                     }} >search</button>
                 </div>
             </div>
-            <div className="res-container">
+            <div className="res-container flex flex-wrap ">
                 {
-                    filteredList?.map((res) => <Link className="click-res" to={"/restaurant/" + res?.info?.id}><Card key ={res?.info?.id} resdata = {res} /></Link>)
+                    filteredList?.map((res) => <Link key={ res?.info?.id} className="click-res" to={"/restaurant/" + res?.info?.id}><Card key ={res?.info?.id} resdata = {res} /></Link>)
                 }
             </div>
         </div>

@@ -1,3 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* 
 .logo{
     width: 90px;
 }
@@ -18,11 +25,14 @@
 
 .navbar > ul>li {
     
-    cursor: pointer;
+    
     margin: 5px;
     padding: 5px;   
+    text-decoration: none;
+    color: black;
 }
 .navbar > ul>li>a{
+    cursor: pointer;
     text-decoration: none;
     color: black;
 }
@@ -117,7 +127,7 @@
 }
 
 .menu-info{
-    /* background-color: #fff4c7; */
+ 
     padding-left: 10px;
     margin-left: 20px;
     margin-right: 20px;
@@ -142,14 +152,32 @@
 }
 .click-res {
     display: block;
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Inherits the text color */
+    text-decoration: none; 
+    color: inherit; 
 }
 .item-details{
     display: flex;
     justify-content: space-between;
+    margin-top: 2px;
+    padding: 5px;
+    
+   
+}
+.item-details:hover{
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
 }
 .item-logo{
     height: 90px;
     width: 90px;
 }
+.user-class{
+    margin:30px 200px 10px 200px;
+    background-color: #f0f0f0;
+    border-radius: 25px;
+    height: 300px;
+    padding-left: 25px;
+    padding-top: 25px;
+}
+ */
