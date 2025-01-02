@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card , {CardWithOneBenifits} from "./Card";
 import  React, { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { RES_API } from "../utils/constants";
@@ -11,19 +11,18 @@ const Body = ()=>{
     const [filteredList , setFilteredList] = useState(resData);
     const [isFiltered ,  setIsFiltered] = useState(false);
     const [searchValue , setSearchValue] = useState("");
-
+    const CardWithBenifits = CardWithOneBenifits(Card);
 
     useEffect(()=>{
        fetchData();
-    }, [])
+    }, []);
 
 
-    fetchData = async ()=>{
+    const fetchData = async ()=>{
         const data = await fetch(RES_API);
         const json = await data.json();
         setResData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        console.log(filteredList)
     }
     
     const filter = ()=>{
@@ -35,12 +34,12 @@ const Body = ()=>{
             setIsFiltered(false);
         }
     }
-    console.log(filteredList)
+    console.log(resData);
     if(filteredList.length === 0){
         return (
             <div>
                 <div className="buttons flex items-center m-2">
-                    <button className="filter-btn mx-2 bg-slate-500 rounded-xl w-20 " onClick={filter} >
+                    <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
                         {!isFiltered ? "filter" : "see all" }
                     </button>
 
@@ -48,7 +47,7 @@ const Body = ()=>{
                         <input className="input  bg-gray-200 rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
                             setSearchValue(e.target.value);
                         }}></input>
-                        <button className="search-btn mx-2 bg-slate-500 rounded-xl w-20"  onClick={()=>{
+                        <button className="search-btn mx-2 bg-slate-300 rounded-xl w-20"  onClick={()=>{
                             const filteredRes = resData.filter((res)=> 
                                 res.info.name.toLowerCase().includes(searchValue.toLowerCase())
                             )
@@ -68,7 +67,7 @@ const Body = ()=>{
     return (
         <div className="Body" >
             <div className="buttons flex items-center m-2 ">
-                <button className="filter-btn mx-2 bg-slate-500 rounded-xl w-20 " onClick={filter} >
+                <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
                     {!isFiltered ? "filter" : "see all" }
                 </button>
 
@@ -76,7 +75,7 @@ const Body = ()=>{
                     <input className="input bg-gray-200 rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
                         setSearchValue(e.target.value);
                     }}></input>
-                    <button className="search-btn mx-2 bg-slate-500 rounded-xl w-20"  onClick={()=>{
+                    <button className="search-btn mx-2 bg-slate-300 rounded-xl w-20"  onClick={()=>{
                         const filteredRes = resData.filter((res)=> 
                             res.info.name.toLowerCase().includes(searchValue.toLowerCase())
                         )
@@ -85,9 +84,17 @@ const Body = ()=>{
                 </div>
             </div>
             <div className="res-container flex flex-wrap ">
-                {
-                    filteredList?.map((res) => <Link key={ res?.info?.id} className="click-res" to={"/restaurant/" + res?.info?.id}><Card key ={res?.info?.id} resdata = {res} /></Link>)
-                }
+                {filteredList?.map((res) => {
+                    return (
+                        <Link key={ res?.info?.id} className="click-res" to={"/restaurant/" + res?.info?.id}>
+                        {
+                            res?.info?.veg ?
+                             <CardWithBenifits key ={res?.info?.id} resdata = {res} /> :
+                              <Card key ={res?.info?.id} resdata = {res} />
+                        }
+                     </Link>
+                    )
+                })}
             </div>
         </div>
         

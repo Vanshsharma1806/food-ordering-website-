@@ -9,12 +9,12 @@ const Header = ()=>{
     const onlineStatus = useOnlineStatus();
 
     return (
-    <div className="bg-slate-500 flex justify-between items-center shadow-xl">
+    <div className="bg-slate-400 flex justify-between items-center shadow-xl">
         <div className="logo-container">
-            <Link to="/"><img className=" m-2 w-24 rounded-lg" alt="logo" src={LOGO_URL}></img></Link>
+            <Link to="/"><img className=" m-2 w-24 rounded-lg shadow-lg" alt="logo" src={LOGO_URL}></img></Link>
         </div>
         <div className="navbar">
-            <ul className="flex items-center">
+            <ul className="flex items-center ">
                 <li className=" mx-1 ">Online Status: {onlineStatus ? "✅" : "🔴"}</li>
                 <li className=" mx-1 "><Link to="/">Home</Link></li> 
                 <li className=" mx-1 "><Link to="/about"> About Us</Link> </li> 
