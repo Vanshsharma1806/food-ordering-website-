@@ -1,13 +1,28 @@
-import { useState } from "react"
-const login = ()=>{
+import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+const Login = ()=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {login, isLoggedIn} = useAuth();
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    useEffect (()=>{
+        if(isLoggedIn){
+            navigate("/", { replace: true });
+        }
+    },[isLoggedIn, navigate]);
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would typically handle the login logic, e.g., API call
-        console.log("Email:", email);
-        console.log("Password:", password);
+        const result = await login(email, password);
+        if (result.success) {
+          navigate("/", { replace: true });
+        } else {
+          setError(result.message || "Login failed");
+        }
     }
 
     return(
@@ -31,11 +46,16 @@ const login = ()=>{
                         Submit
                     </button>
                     <div>
-                        <p>Don't have an account? Sign up.</p>
+                        <p><Link to="/signup">Don't have an account? Sign up.</Link></p>
                     </div>
                 </form>
             </div>
+            {
+                error && (
+                    <p className="text-red-500 text-sm mb-2 text-center" >{error}</p>
+                )
+            }
         </div>    
     )
 }
-export default login;
+export default Login;

@@ -1,20 +1,54 @@
+import { use, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 const Signup = ()=>{
-    const handleSubmit = (e) => {
+
+    const {signup, isLoggedIn} = useAuth();
+    const navigate = useNavigate();
+
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const[error, setError] = useState("");
+    const [successMsg, setSuccessMsg] = useState("");
+
+    useEffect(()=>{
+        if(isLoggedIn){
+            navigate("/", {replace:true});
+        }
+    },[isLoggedIn, navigate]);
+
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would typically handle the login logic, e.g., API call
-        console.log("Email:", email);
-        console.log("Password:", password);
-    }
+        const result = await signup(username, email, password);
+        if (result.success) {
+          setSuccessMsg(result.message);
+          setError("");
+          setTimeout(() => navigate("/login"), 1500);
+        } else {
+          setError(result.message || "Signup failed");
+          setSuccessMsg("");
+        }   
+    };
+
 
     return(
         <div className="bg-gray-100 h-screen flex flex-col items-center pt-32">
             <div className=" bg-white gap-1 p-6 rounded shadow-md w-96 ">
                 <div className="flex  items-center justify-center pb-14">
                     <h2 className=" text-2xl font-bold mb-4">
-                        Log In 
+                        Sign Up
                     </h2>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+                    <div className="flex gap-10">
+                        <label className="text-sm font-medium">Username:</label>
+                        <input type="username" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} className="border-black  rounded-md border-2 "/>
+                    </div>
                     <div className="flex gap-10">
                         <label className="text-sm font-medium">Email:</label>
                         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="border-black  rounded-md border-2 "/>
@@ -23,14 +57,21 @@ const Signup = ()=>{
                         <label className="text-sm font-medium">Password:</label>
                         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="border-black  rounded-md border-2 " />
                     </div>
-                    <button type="submit" className="bg-blue-500  text-white px-4 py-2 w-10 rounded hover:bg-blue-600">
+                    <button type="submit" className="bg-blue-500 text-white py-2 rounded-3xl hover:bg-blue-600">
                         Submit
                     </button>
                     <div>
-                        <p>Don't have an account? Sign up.</p>
+                        <p><Link to="/login">Already have an account? Log In.</Link></p>
                     </div>
                 </form>
             </div>
+            {error && (
+              <p className="text-red-500 text-sm mb-2 text-center">{error}</p>
+            )}
+            {successMsg && (
+              <p className="text-green-500 text-sm mb-2 text-center">{successMsg}</p>
+            )}
         </div>    
     )
 }
+export default Signup;

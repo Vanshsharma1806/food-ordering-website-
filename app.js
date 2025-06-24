@@ -7,6 +7,9 @@ import About from "./src/components/About";
 import Contact from "./src/components/contact";
 import Error from "./src/components/Error";
 import ResMenu from "./src/components/ResMenu";
+import Login from "./src/components/Login";
+import Signup from "./src/components/Signup";
+import { AuthProvider } from "./src/context/AuthContext";
 
 const AppLayout = ()=>{
 
@@ -37,6 +40,14 @@ const appRouter  = createBrowserRouter([
             {
                 path:"/restaurant/:resId",
                 element:<ResMenu/>,
+            },
+            {
+                path:"/login",
+                element:<Login/>
+            },
+            {
+                path:"/signup",
+                element:<Signup/>
             }
         ],
         errorElement:<Error/>,
@@ -45,4 +56,8 @@ const appRouter  = createBrowserRouter([
 ])
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter}/>)
+root.render(
+    <AuthProvider>
+        <RouterProvider router={appRouter}/>
+    </AuthProvider>
+)
