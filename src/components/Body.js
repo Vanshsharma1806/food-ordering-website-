@@ -17,39 +17,43 @@ const Body = ()=>{
        fetchData();
     }, []);
 
-
     const fetchData = async ()=>{
-        const data = await fetch(RES_API);
-        const json = await data.json();
-        setResData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFilteredList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        try{
+            const data = await fetch(RES_API);
+            const json = await data.json();
+            setResData(json);
+            setFilteredList(json);
+            console.log(json);
+        }catch(err){
+            console.error("Error fetching restaurants :" , err);
+        }
     }
     
     const filter = ()=>{
         if(!isFiltered){
-            setFilteredList(resData.filter((el) => el.info.avgRating>4.3))
+            setFilteredList(resData.filter((el) => el.avgRating>4.3))
             setIsFiltered(true);
         }else{
             setFilteredList(resData)
             setIsFiltered(false);
         }
     }
-    console.log(resData);
+  
     if(filteredList.length === 0){
         return (
             <div>
-                <div className="buttons flex items-center m-2">
+                <div className="buttons flex items-center m-2  bg-gray-200 ">
                     <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
                         {!isFiltered ? "filter" : "see all" }
                     </button>
 
                     <div className="search">
-                        <input className="input  bg-gray-200 rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
+                        <input className="input  bg-gray-200 border border-black rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
                             setSearchValue(e.target.value);
                         }}></input>
                         <button className="search-btn mx-2 bg-slate-300 rounded-xl w-20"  onClick={()=>{
                             const filteredRes = resData.filter((res)=> 
-                                res.info.name.toLowerCase().includes(searchValue.toLowerCase())
+                                res.name.toLowerCase().includes(searchValue.toLowerCase())
                             )
                             setFilteredList(filteredRes);
                         }} >search</button>
@@ -65,19 +69,19 @@ const Body = ()=>{
 
     
     return (
-        <div className="Body" >
-            <div className="buttons flex items-center m-2 ">
+        <div className="Body  bg-gray-200" >
+            <div className="buttons flex items-center m-2   ">
                 <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
                     {!isFiltered ? "filter" : "see all" }
                 </button>
 
                 <div className="search mx-2">
-                    <input className="input bg-gray-200 rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
+                    <input className="input border border-black rounded-md px-2" type="text" value={searchValue}  onChange={(e)=>{
                         setSearchValue(e.target.value);
                     }}></input>
                     <button className="search-btn mx-2 bg-slate-300 rounded-xl w-20"  onClick={()=>{
                         const filteredRes = resData.filter((res)=> 
-                            res.info.name.toLowerCase().includes(searchValue.toLowerCase())
+                            res.name.toLowerCase().includes(searchValue.toLowerCase())
                         )
                         setFilteredList(filteredRes)
                     }} >search</button>
@@ -86,13 +90,13 @@ const Body = ()=>{
             <div className="res-container flex flex-wrap ">
                 {filteredList?.map((res) => {
                     return (
-                        <Link key={ res?.info?.id} className="click-res" to={"/restaurant/" + res?.info?.id}>
-                        {
-                            res?.info?.veg ?
-                             <CardWithBenifits key ={res?.info?.id} resdata = {res} /> :
-                              <Card key ={res?.info?.id} resdata = {res} />
-                        }
-                     </Link>
+                        <Link key={ res?.id} className="click-res" to={"/restaurant/" + res?.id}>
+                            {
+                                res?.veg ?
+                                 <CardWithBenifits key ={res?.id} resdata = {res} /> :
+                                  <Card key ={res?.id} resdata = {res} />
+                            }
+                        </Link>
                     )
                 })}
             </div>

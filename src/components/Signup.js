@@ -27,7 +27,6 @@ const Signup = ()=>{
         const result = await signup(username, email, password);
         if (result.success) {
           setSuccessMsg(result.message);
-          setError("");
           setTimeout(() => navigate("/login"), 1500);
         } else {
           setError(result.message || "Signup failed");
@@ -45,7 +44,7 @@ const Signup = ()=>{
                     </h2>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                    <div className="flex gap-10">
+                    <div className="flex gap-3">
                         <label className="text-sm font-medium">Username:</label>
                         <input type="username" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} className="border-black  rounded-md border-2 "/>
                     </div>
@@ -53,7 +52,7 @@ const Signup = ()=>{
                         <label className="text-sm font-medium">Email:</label>
                         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="border-black  rounded-md border-2 "/>
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex gap-3">
                         <label className="text-sm font-medium">Password:</label>
                         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="border-black  rounded-md border-2 " />
                     </div>

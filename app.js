@@ -10,6 +10,7 @@ import ResMenu from "./src/components/ResMenu";
 import Login from "./src/components/Login";
 import Signup from "./src/components/Signup";
 import { AuthProvider } from "./src/context/AuthContext";
+import ProtectedRoute from "./src/components/ProtectedRoute";
 
 const AppLayout = ()=>{
 
@@ -27,19 +28,35 @@ const appRouter  = createBrowserRouter([
         children: [
             {
                 path:"/",
-                element:<Body/>,
+                element:(
+                    <ProtectedRoute>
+                        <Body/>
+                    </ProtectedRoute>
+                ),
             },
             {
                 path:"/about",
-                element:<About/>,
+                element:(
+                    <ProtectedRoute>
+                        <About/>
+                    </ProtectedRoute>
+                ),
             },
             {
                 path:"/contact",
-                element:<Contact/>,
+                element:(
+                    <ProtectedRoute>
+                        <Contact/>
+                    </ProtectedRoute>
+                ),
             },
             {
                 path:"/restaurant/:resId",
-                element:<ResMenu/>,
+                element:(
+                    <ProtectedRoute>
+                        <ResMenu/>
+                    </ProtectedRoute>
+                ),
             },
             {
                 path:"/login",
