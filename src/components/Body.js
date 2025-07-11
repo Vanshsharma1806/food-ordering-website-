@@ -3,10 +3,12 @@ import  React, { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { RES_API } from "../utils/constants";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 const Body = ()=>{
 
+    const {user} = useAuth();
     const [resData , setResData] = useState([]);
     const [filteredList , setFilteredList] = useState(resData);
     const [isFiltered ,  setIsFiltered] = useState(false);
@@ -19,7 +21,13 @@ const Body = ()=>{
 
     const fetchData = async ()=>{
         try{
-            const data = await fetch(RES_API);
+            const data = await fetch(RES_API, {
+                method: "GET",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${user.token}`,
+                 },
+            });
             const json = await data.json();
             setResData(json);
             setFilteredList(json);
@@ -31,7 +39,7 @@ const Body = ()=>{
     
     const filter = ()=>{
         if(!isFiltered){
-            setFilteredList(resData.filter((el) => el.avgRating>4.3))
+            setFilteredList(resData.filter((el) => el.avgRating>4.4))
             setIsFiltered(true);
         }else{
             setFilteredList(resData)
@@ -44,7 +52,7 @@ const Body = ()=>{
             <div>
                 <div className="buttons flex items-center m-2  bg-gray-200 ">
                     <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
-                        {!isFiltered ? "filter" : "see all" }
+                        {!isFiltered ? "Top ⭐" : "see all" }
                     </button>
 
                     <div className="search">
@@ -72,7 +80,7 @@ const Body = ()=>{
         <div className="Body  bg-gray-200" >
             <div className="buttons flex items-center m-2   ">
                 <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
-                    {!isFiltered ? "filter" : "see all" }
+                    {!isFiltered ? "Top ⭐" : "see all" }
                 </button>
 
                 <div className="search mx-2">

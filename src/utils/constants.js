@@ -9,4 +9,4 @@ export const CART_LOGO ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS
 
 export const CDN_URL ="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 
-export const MENU_API= "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.9711023&lng=77.6544715&restaurantId=";
+export const MENU_API= "http://localhost:8080/api/restaurant/";

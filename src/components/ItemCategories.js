@@ -1,8 +1,8 @@
 import MenuItems from "./MenuItems";
-import { useState } from "react";
+
 const ItemCategories = ({category, index, showItem, showIndex, setShowIndex})=> {
-    const {title} = category?.card?.card;
-    const {itemCards} = category?.card?.card;
+    const {title} = category;
+    const itemCards = category.items;
     const handelClick = () => {
         if(showIndex === index){
             setShowIndex(null);
@@ -18,7 +18,7 @@ const ItemCategories = ({category, index, showItem, showIndex, setShowIndex})=> 
                 <label className="cursor-pointer">🔽</label>
             </div>
             {showItem && itemCards.map((item) => (
-                <MenuItems key={item?.card?.info?.id} item={item} />
+                <MenuItems key={item.id} item={item} />
             ))
             }
         </div>

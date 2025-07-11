@@ -1,4 +1,4 @@
-import { Children, createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 export const AuthProvider = ({children})=>{
@@ -28,14 +28,19 @@ export const AuthProvider = ({children})=>{
         try{
             const res = await fetch("http://localhost:8080/api/auth/login",{
                 method: "POST",
-                headers : {"Content-Type" : "application/json"},
+                headers : {
+                    "Content-Type" : "application/json",
+                    
+
+                },
                 body: JSON.stringify({email, password}),
             });
             if(!res.ok){
                 const errorData = await res.json();
                 throw new Error(errorData.message || "Login Failed");
             }
-            const data = res.json();
+            
+            const data = await res.json();
             const userData = {
                 id: data.id,
                 username: data.username,
