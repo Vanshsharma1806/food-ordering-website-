@@ -51,7 +51,7 @@ const Body = ()=>{
         return (
             <div>
                 <div className="buttons flex items-center m-2  bg-gray-200 ">
-                    <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
+                    <button className="filter-btn mx-2 bg-gray-300 rounded-xl w-20 " onClick={filter} >
                         {!isFiltered ? "Top ⭐" : "see all" }
                     </button>
 
@@ -59,7 +59,7 @@ const Body = ()=>{
                         <input className="input  bg-gray-200 border border-black rounded-xl px-2" type="text" value={searchValue}  onChange={(e)=>{
                             setSearchValue(e.target.value);
                         }}></input>
-                        <button className="search-btn mx-2 bg-slate-300 rounded-xl w-20"  onClick={()=>{
+                        <button className="search-btn mx-2 bg-gray-300 rounded-xl w-20"  onClick={()=>{
                             const filteredRes = resData.filter((res)=> 
                                 res.name.toLowerCase().includes(searchValue.toLowerCase())
                             )
@@ -79,7 +79,7 @@ const Body = ()=>{
     return (
         <div className="Body  bg-gray-200" >
             <div className="buttons flex items-center m-2   ">
-                <button className="filter-btn mx-2 bg-slate-300 rounded-xl w-20 " onClick={filter} >
+                <button className="filter-btn mx-2 bg-gray-300 rounded-xl w-20  " onClick={filter} >
                     {!isFiltered ? "Top ⭐" : "see all" }
                 </button>
 
@@ -87,7 +87,7 @@ const Body = ()=>{
                     <input className="input border border-black rounded-md px-2" type="text" value={searchValue}  onChange={(e)=>{
                         setSearchValue(e.target.value);
                     }}></input>
-                    <button className="search-btn mx-2 bg-slate-300 rounded-xl w-20"  onClick={()=>{
+                    <button className="search-btn mx-2 bg-gray-300 rounded-xl w-20"  onClick={()=>{
                         const filteredRes = resData.filter((res)=> 
                             res.name.toLowerCase().includes(searchValue.toLowerCase())
                         )

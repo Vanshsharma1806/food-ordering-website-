@@ -11,6 +11,8 @@ import Login from "./src/components/Login";
 import Signup from "./src/components/Signup";
 import { AuthProvider } from "./src/context/AuthContext";
 import ProtectedRoute from "./src/components/ProtectedRoute";
+import { CartProvider } from "./src/context/CartContext";
+import Cart from "./src/components/Cart";
 
 const AppLayout = ()=>{
 
@@ -65,6 +67,10 @@ const appRouter  = createBrowserRouter([
             {
                 path:"/signup",
                 element:<Signup/>
+            },
+            {
+                path:"/cart",
+                element: <Cart/>
             }
         ],
         errorElement:<Error/>,
@@ -75,6 +81,8 @@ const appRouter  = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <AuthProvider>
-        <RouterProvider router={appRouter}/>
+        <CartProvider>
+            <RouterProvider router={appRouter}/>
+        </CartProvider>
     </AuthProvider>
 )

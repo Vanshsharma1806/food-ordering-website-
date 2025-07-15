@@ -31,7 +31,6 @@ const ResMenu = ()=>{
                 <h4 className="font-semibold"> { slaString} </h4>
             </div>
         </div>
-        
         <h2 className="mx-3 text-xl font-bold my-1">Menu</h2>
         <ul className="mx-5">
             
