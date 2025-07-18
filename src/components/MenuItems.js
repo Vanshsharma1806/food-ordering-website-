@@ -8,7 +8,7 @@ const MenuItems = (props)=>{
     const {item} = props;
     const {id, name, price, imageId} = item;
     // const [quantity, setQuantity] = useState(0);
-    const {cartItems, addItem, incrementItem, decrementItem} = useCart(); 
+    const {cartItems, addItem, removeItem} = useCart(); 
     const quantity = cartItems[id]?.quantity || 0;
 
     return <div className="item-details flex justify-between p-2 shadow-md bg-gray-50 mt-2 rounded  " onClick={(e) => e.stopPropagation()}>
@@ -28,13 +28,13 @@ const MenuItems = (props)=>{
                     :
                     (
                        <>
-                            <button className="text-green-500 w-1/3 h-full font-extrabold hover:bg-gray-300" onClick={ () => decrementItem(id)}>
+                            <button className="text-green-500 w-1/3 h-full font-extrabold hover:bg-gray-300" onClick={ () => removeItem(id)}>
                                 -
                             </button>
                             <span className="text-green-500 w-1/3 block text-center font-bold" >
                                 {quantity}
                             </span>
-                            <button className="text-green-500 w-1/3 h-full font-bold hover:bg-gray-300" onClick={() => incrementItem(id)}>
+                            <button className="text-green-500 w-1/3 h-full font-bold hover:bg-gray-300" onClick={() => addItem(item)}>
                                 +
                             </button>
                        </>

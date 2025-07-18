@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import useResMenu from "../utils/useResMenu";
 import ItemCategories from "./ItemCategories";
 import { useState } from "react";
+import ShimmerMenu from "./ShimmerMenu";
 const ResMenu = ()=>{
 
     const {resId} = useParams();
     const resInfo = useResMenu(resId);
     const [showIndex, setShowIndex] = useState(0);
     
-    if(resInfo == null) return <Shimmer/>
+    if(resInfo == null) return <ShimmerMenu/>
 
     const {id, name, city, cuisines, costForTwoMessage, avgRating, locality, slaString} = resInfo;
 
